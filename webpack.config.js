@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
+const { CheckerPlugin } = require('awesome-typescript-loader')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -31,5 +33,9 @@ module.exports = {
             { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
             { test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' }
         ]
-    }
+    },
+    plugins: [
+        new CheckerPlugin(),
+        new HardSourceWebpackPlugin()
+    ]
 };
