@@ -1,0 +1,20 @@
+{
+  "name": "react-arcgis-js-storybooi",
+  "version": "0.1.0",
+  "main": "build/index.js",
+  "repository": "https://github.com/brygrill/react-arcgis-js.git",
+  "author": "Bryan Grill",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "@storybook/react": "^3.3.15",
+    "babel-core": "^6.26.0"
+  },
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "scripts": {
+    "start": "start-storybook -p 9001 -c .storybook"
+  }
+}
