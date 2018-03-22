@@ -1,0 +1,15 @@
+{
+  "extends": [
+    "tslint-config-prettier",
+    "tslint:latest",
+    "tslint-react"
+  ],
+  "rules": {
+    "strict-type-predicates": false,
+    "ordered-imports": true,
+    "only-arrow-functions": [false],
+    "object-literal-sort-keys": false,
+    "interface-name": [true, "always-prefix"],
+    "quotemark": [true, "single"]
+  }
+}
