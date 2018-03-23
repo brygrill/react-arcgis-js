@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
-const { CheckerPlugin } = require('awesome-typescript-loader')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -30,12 +30,18 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader',
+                options: {
+                    transpileOnly: true
+                }
+            },
             { test: /\.js$/, loader: 'source-map-loader', enforce: 'pre' }
         ]
     },
     plugins: [
-        new CheckerPlugin(),
-        new HardSourceWebpackPlugin()
+        new HardSourceWebpackPlugin(),
+        new ForkTsCheckerWebpackPlugin()
     ]
 };
