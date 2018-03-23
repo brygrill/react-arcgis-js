@@ -7,6 +7,4 @@ storiesOf('Map', module)
   .add('with no item id', () => (
     <Map />
   ))
-  .add('with item id', () => (
-    <Map itemId="aea0b8bf28884a27bfb5523b3d6d6aeb"/>
-  ))
+  .add('with item id', () => <Map itemId="aea0b8bf28884a27bfb5523b3d6d6aeb" />);
