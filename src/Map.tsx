@@ -1,24 +1,25 @@
 import { loadCss, loadModules } from 'esri-loader';
 import * as React from 'react';
 
-export interface IHelloProps {
-  compiler: string;
-  framework: string;
+export interface IMapProps {
+  itemId: string;
 }
 
-export class Hello extends React.Component<IHelloProps, {}> {
+export class Map extends React.Component<IMapProps, {}> {
+  public static defaultProps: Partial<IMapProps> = {
+    itemId: 'f2e9b762544945f390ca4ac3671cfa72',
+  };
   public componentDidMount() {
-    loadCss('https://js.arcgis.com/4.6/esri/css/main.css');
     loadModules(['esri/views/MapView', 'esri/WebMap'])
       .then(([MapView, WebMap]) => {
         const map = new WebMap({
           portalItem: {
-            id: 'f2e9b762544945f390ca4ac3671cfa72'
-          }
+            id: this.props.itemId,
+          },
         });
         const view = new MapView({
           map,
-          container: this.map,
+          container: 'my-map',
         });
       })
       .catch((e: Error) => {
@@ -26,12 +27,6 @@ export class Hello extends React.Component<IHelloProps, {}> {
       });
   }
   public render() {
-    return (
-      <div>
-        <div className="map">
-          <div ref={(map) => { this.map = map; }} />
-        </div>
-      </div>
-    );
+    return <div id="my-map" style={{ height: '100%', width: '100%' }} />;
   }
 }

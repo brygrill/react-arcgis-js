@@ -1,0 +1,8 @@
+@import url('https://js.arcgis.com/4.6/esri/css/main.css');
+
+#root {
+  height: 600px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

@@ -1,12 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { HelloThere } from 'react-arcgis-js';
+import { Map } from 'react-arcgis-js';
 
-storiesOf('Button', module)
-  .add('with text', () => (
-    <HelloThere compiler="tsc" framework="react"/>
+storiesOf('Map', module)
+  .add('with no item id', () => (
+    <Map />
   ))
-  // .add('with some emoji', () => (
-  //   <Btn onClick={action('clicked')} label="😀 😎 👍 💯" />
-  // ));
+  .add('with item id', () => (
+    <Map itemId="aea0b8bf28884a27bfb5523b3d6d6aeb"/>
+  ))

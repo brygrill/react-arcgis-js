@@ -1,11 +1,11 @@
 import { ILoadScriptOptions, loadModules } from 'esri-loader';
-import * as Hello from './Hello';
+import * as MapComponent from './Map';
 
-const Hi = {
-  Hello: Hello.Hello,
+const reactArcGisJS = {
+  Map: MapComponent.Map,
   esriLoader: loadModules,
 };
 
-export default Hi;
+export default reactArcGisJS;
 
-export const HelloThere = Hi.Hello;
+export const Map = reactArcGisJS.Map;
