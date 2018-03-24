@@ -69,13 +69,16 @@ export class Map extends React.Component<IMapProps, IMapState> {
 
   render() {
     const childrenWithProps = React.Children.map(this.props.children, child => {
-      console.log(child);
       const childEl = child as React.ReactElement<any>;
-      React.cloneElement(childEl, { ...this.state });
+      return React.cloneElement(childEl, { ...this.state });
     });
 
     return (
-      <div id={this.state.container} style={{ height: '100%', width: '100%' }}>
+      <div style={{height: '500px'}}>
+        <div
+          id={this.state.container}
+          style={{ height: '100%', width: '100%' }}
+        />
         {childrenWithProps}
       </div>
     );
