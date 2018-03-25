@@ -1,9 +1,13 @@
 import { loadModules } from 'esri-loader';
 import * as React from 'react';
 
+import { Container } from './Container';
+
 export interface IMapProps {
   itemId: string;
   baseMap: string;
+  height: string;
+  width: string;
 }
 
 export interface IMapState {
@@ -63,10 +67,6 @@ export class Map extends React.Component<IMapProps, IMapState> {
     this.createMap();
   }
 
-  componentDidCatch() {
-    this.setState({ error: true });
-  }
-
   render() {
     const childrenWithProps = React.Children.map(this.props.children, child => {
       const childEl = child as React.ReactElement<any>;
@@ -74,13 +74,13 @@ export class Map extends React.Component<IMapProps, IMapState> {
     });
 
     return (
-      <div style={{height: '500px'}}>
+      <Container height={this.props.height} width={this.props.width}>
         <div
           id={this.state.container}
           style={{ height: '100%', width: '100%' }}
         />
         {childrenWithProps}
-      </div>
+      </Container>
     );
   }
 }
