@@ -1,42 +1,22 @@
 import * as React from 'react';
 
+import { Boundary } from './Boundary';
+
 export interface IContainerProps {
   height: string;
   width: string;
+  id: string;
+  onError: any;
+  children?: any;
 }
 
-export interface IContainerState {
-  error: boolean;
-}
-
-export class Container extends React.Component<
-  IContainerProps,
-  IContainerState
-> {
-  public static defaultProps: Partial<IContainerProps> = {
-    height: '500px',
-    width: '100%'
-  };
-
-  constructor(props: IContainerProps) {
-    super(props);
-    this.state = {
-      error: false,
-    };
-  }
-
-  componentDidCatch(error: Error, info: React.ErrorInfo) {
-    this.setState({ error: true });
-  }
-
-  render() {
-    if (this.state.error) {
-      return <div>Error msg here!</div>
-    }
-    return (
-      <div style={{ height: this.props.height, width: this.props.width }}>
-        {this.props.children}
+export const Container = (props: IContainerProps) => {
+  return (
+    <Boundary onError={props.onError}>
+      <div style={{ height: props.height, width: props.width }}>
+        <div id={props.id} style={{ height: '100%', width: '100%' }} />
+        {props.children}
       </div>
-    );
-  }
-}
+    </Boundary>
+  );
+};
