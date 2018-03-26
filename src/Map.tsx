@@ -62,7 +62,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
           map,
           container: this.state.containerId,
         });
-        this.setState({ loading: true, map, view });
+        this.setState({ loading: false, map, view });
       })
       .catch(() => {
         this.setState({ loading: false, error: true });
@@ -82,6 +82,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
           width={this.props.width}
           onError={this.props.onError}
           id={this.state.containerId}
+          hidden={this.state.loading}
         >
           {this.props.onLoading}
         </Container>
@@ -96,6 +97,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
           width={this.props.width}
           onError={this.props.onError}
           id={this.state.containerId}
+          hidden={this.state.error}
         >
           {this.props.onError}
         </Container>
