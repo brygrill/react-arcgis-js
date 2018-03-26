@@ -4,12 +4,14 @@ import * as React from 'react';
 import { Container } from './Container';
 
 export interface IMapProps {
-  onLoading: any;
-  onError: any;
-  itemId: string;
-  baseMap: string;
-  height: string;
-  width: string;
+  onLoading?: any; // string or component to render while loading map
+  onError?: any; //  string or component to render on error
+  itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
+  baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+  height: string; // height of map container in px or %
+  width: string; // width of map container in px or %
+  center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
+  zoom?: number; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom
 }
 
 export interface IMapState {
@@ -26,7 +28,11 @@ export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
     onLoading: 'Loading...',
     onError: 'Error loading map...',
-    baseMap: 'streets',
+    baseMap: 'streets-navigation-vector',
+    height: '500px',
+    width: '100%',
+    center: [-122.41, 37.77],
+    zoom: 10,
   };
 
   constructor(props: IMapProps) {
@@ -61,6 +67,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
         const view = new MapView({
           map,
           container: this.state.containerId,
+          center: this.props.center,
+          zoom: this.props.zoom,
         });
         this.setState({ loading: false, map, view });
       })
