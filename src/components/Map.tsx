@@ -3,11 +3,13 @@ import * as React from 'react';
 
 import { Container } from './Container';
 
+import { BaseMapOptions } from '../helpers';
+
 export interface IMapProps {
   onLoading?: any; // string or component to render while loading map
   onError?: any; //  string or component to render on error
   itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
-  baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+  baseMap?: BaseMapOptions; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   height: string; // height of map container in px or %
   width: string; // width of map container in px or %
   center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
@@ -28,7 +30,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
     onLoading: 'Loading...',
     onError: 'Error loading map...',
-    baseMap: 'streets-navigation-vector',
+    baseMap: BaseMapOptions.streets_navigation_vector,
     height: '500px',
     width: '100%',
     center: [-122.41, 37.77],

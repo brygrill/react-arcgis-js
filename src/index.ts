@@ -1,5 +1,5 @@
 import { ILoadScriptOptions, loadModules } from 'esri-loader';
-import * as MapComponent from './Map';
+import * as MapComponent from './components/Map';
 
 const reactArcGisJS = {
   Map: MapComponent.Map,
