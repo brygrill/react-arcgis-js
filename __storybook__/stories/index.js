@@ -14,6 +14,6 @@ const Child = props => {
 
 storiesOf('Map', module)
   .add('with no item id', () => (
-    <Map><Child/></Map>
+    <Map webGL><Child/></Map>
   ))
   .add('with item id', () => <Map itemId="aea0b8bf28884a27bfb5523b3d6d6aeb" />);

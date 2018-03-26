@@ -14,6 +14,7 @@ export interface IMapProps {
   width: string; // width of map container in px or %
   center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
   zoom?: number; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom
+  webGL?: boolean; // will load dojo config to enable WebGL Feature Layers
 }
 
 export interface IMapState {
@@ -24,6 +25,7 @@ export interface IMapState {
   mapOptions: object;
   map: object;
   view: object;
+  moduleOptions: object;
 }
 
 export class Map extends React.Component<IMapProps, IMapState> {
@@ -48,6 +50,15 @@ export class Map extends React.Component<IMapProps, IMapState> {
       modules: props.itemId
         ? ['esri/views/MapView', 'esri/WebMap']
         : ['esri/views/MapView', 'esri/Map'],
+      moduleOptions: props.webGL
+        ? {
+            dojoConfig: {
+              has: {
+                'esri-featurelayer-webgl': 1,
+              },
+            },
+          }
+        : {},
       mapOptions: props.itemId
         ? {
             portalItem: {
@@ -63,7 +74,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   }
 
   createMap = () => {
-    loadModules(this.state.modules)
+    loadModules(this.state.modules, this.state.moduleOptions)
       .then(([MapView, Map]) => {
         const map = new Map(this.state.mapOptions);
         const view = new MapView({
