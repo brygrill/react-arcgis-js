@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Boundary /> should display children without error 1`] = `
+<div>
+  <div>
+    Map
+  </div>
+</div>
+`;
+
+exports[`<Boundary /> should display error message when there is error 1`] = `
+<div>
+  Error!
+</div>
+`;
