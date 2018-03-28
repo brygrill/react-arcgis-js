@@ -5,7 +5,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
 
-import {Boundary} from '../components/Boundary';
+import { Boundary } from '../src/components/Boundary';
 
 configure({ adapter: new Adapter() });
 
@@ -13,7 +13,7 @@ describe('<Boundary />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <Boundary onError='Error!'>
+      <Boundary onError="Error!">
         <div>Map</div>
       </Boundary>,
       div,
@@ -23,7 +23,7 @@ describe('<Boundary />', () => {
   it('should display children without error', () => {
     const tree = renderer
       .create(
-        <Boundary onError='Error!'>
+        <Boundary onError="Error!">
           <div>Map</div>
         </Boundary>,
       )
@@ -33,7 +33,7 @@ describe('<Boundary />', () => {
 
   it('should display error message when there is error', () => {
     const component = shallow(
-      <Boundary onError='Error!'>
+      <Boundary onError="Error!">
         <div>App</div>
       </Boundary>,
     );
