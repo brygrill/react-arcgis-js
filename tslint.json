@@ -9,6 +9,6 @@
     "only-arrow-functions": [false],
     "object-literal-sort-keys": false,
     "interface-name": [true, "always-prefix"],
-    "quotemark": [true, "single"]
+    "quotemark": [true, "single", "jsx-double"]
   }
 }
