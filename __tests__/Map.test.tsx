@@ -9,6 +9,8 @@ import { Map } from '../src/components/Map';
 
 configure({ adapter: new Adapter() });
 
+let spy;
+
 describe('<Map />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -21,32 +23,42 @@ describe('<Map />', () => {
   });
 
   it('should initially display loading msg', () => {
-    const tree = renderer
-      .create(
-        <Map height="500px" width="100%">
-          <div>Child Component</div>
-        </Map>,
-      )
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const component = shallow(
+      <Map height="500px" width="100%" onLoading="Map Loading">
+        <div>Child Component</div>
+      </Map>,
+    );
+    expect(component.contains('Map Loading')).toBeTruthy();
   });
 
-  it('should load map on mount', async () => {
-    const component = await mount(
+  it('should display error message when there is error', () => {
+    const component = shallow(
+      <Map height="500px" width="100%" onError="Error!!!">
+        <div>Child Component</div>
+      </Map>,
+    );
+
+    component.setState({ error: true, loading: false });
+
+    // component.instance().forceUpdate()
+    expect(component.contains('Error!!!')).toBeTruthy();
+  });
+
+  it('should call componentDidMount', () => {
+    spy = jest.spyOn(Map.prototype, 'componentDidMount');
+    const wrapper = mount(
       <Map height="500px" width="100%">
         <div>Child Component</div>
       </Map>,
     );
-    // const component = shallow(
-    //   <Map height="500px" width="100%">
-    //     <div>Child Component</div>
-    //   </Map>,
-    // );
-    // await component.instance().componentDidMount();
-    component.update()
-    // console.log(component.state('map'));
-    // expect(component.state('map')).toBeTruthy();
-    // expect(toJson(component)).toMatchSnapshot();
-    console.log(component.state());
+    expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  // TODO: test createMap function
+  // mock success and check state
+  // mock fail and check state
+});
+
+afterEach(() => {
+  if (spy) spy.mockClear();
 });

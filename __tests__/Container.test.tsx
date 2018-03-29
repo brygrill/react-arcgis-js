@@ -24,4 +24,20 @@ describe('<Container />', () => {
       div,
     );
   });
+
+  it('should display children without error', () => {
+    const tree = renderer
+      .create(
+        <Container
+          height="500px"
+          width="100%"
+          id="container-test"
+          onError="Error!"
+        >
+          <div>Map</div>
+        </Container>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

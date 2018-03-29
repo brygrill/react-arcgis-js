@@ -74,7 +74,6 @@ export class Map extends React.Component<IMapProps, IMapState> {
   }
 
   createMap = () => {
-    console.log('create map');
     loadModules(this.state.modules, this.state.moduleOptions)
       .then(([MapView, Map]) => {
         const map = new Map(this.state.mapOptions);
@@ -93,7 +92,6 @@ export class Map extends React.Component<IMapProps, IMapState> {
   };
 
   componentDidMount() {
-    console.log('map cDM');
     this.createMap();
   }
 
