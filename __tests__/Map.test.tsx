@@ -57,6 +57,15 @@ describe('<Map />', () => {
   // TODO: test createMap function
   // mock success and check state
   // mock fail and check state
+  it('should call createMap', async () => {
+    spy = jest.spyOn(Map.prototype, 'createMap');
+    const wrapper = mount(
+      <Map height="500px" width="100%">
+        <div>Child Component</div>
+      </Map>,
+    );
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
 });
 
 afterEach(() => {
