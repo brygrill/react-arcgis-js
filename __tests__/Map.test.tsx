@@ -6,12 +6,31 @@ import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
 
 import { Map } from '../src/components/Map';
+import { BaseMapOptions, moduleLoader } from '../src/helpers';
 
 configure({ adapter: new Adapter() });
+
+// mock success
+jest.mock('../src/helpers', () => ({
+  // TODO: mock rendering dom element
+  mockConstructor(options) {
+    this.options = options;
+    return this;
+  },
+  moduleLoader() {
+    return Promise.resolve({
+      MapView: this.mockConstructor,
+      Map: this.mockConstructor,
+    });
+  },
+}));
+// mock catch
 
 let spy;
 
 describe('<Map />', () => {
+
+
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
@@ -54,10 +73,7 @@ describe('<Map />', () => {
     expect(spy).toHaveBeenCalledTimes(1);
   });
 
-  // TODO: test createMap function
-  // mock success and check state
-  // mock fail and check state
-  it('should call createMap', async () => {
+  it('should call createMap', () => {
     spy = jest.spyOn(Map.prototype, 'createMap');
     const wrapper = mount(
       <Map height="500px" width="100%">
@@ -66,8 +82,21 @@ describe('<Map />', () => {
     );
     expect(spy).toHaveBeenCalledTimes(1);
   });
+
+  it('should set state properly when createMap returns successfully', async () => {
+    const wrapper = shallow(
+      <Map height="500px" width="100%">
+        <div>Child Component</div>
+      </Map>,
+      { lifecycleExperimental: true },
+    );
+    await moduleLoader(['one', 'two'], {});
+    expect(wrapper.state(`loading`)).toBeFalsy();
+    expect(wrapper.state(`error`)).toBeFalsy();
+  });
 });
 
 afterEach(() => {
   if (spy) spy.mockClear();
+  jest.clearAllMocks();
 });

@@ -21,6 +21,9 @@ export enum BaseMapOptions {
 }
 
 export const moduleLoader = (modules: Array<string>, moduleOptions: object) => {
+  if (modules.length < 1) {
+    throw new Error();
+  }
   return loadModules(modules, moduleOptions)
     .then(([MapView, Map]) => {
       return { MapView, Map };

@@ -8,7 +8,7 @@ export interface IMapProps {
   onLoading?: any; // string or component to render while loading map
   onError?: any; //  string or component to render on error
   itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
-  baseMap?: BaseMapOptions; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
+  baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   height: string; // height of map container in px or %
   width: string; // width of map container in px or %
   center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
@@ -31,7 +31,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
     onLoading: 'Loading...',
     onError: 'Error loading map...',
-    baseMap: BaseMapOptions.streets_navigation_vector,
+    baseMap: 'streets-navigation-vector',
     height: '500px',
     width: '100%',
     center: [-122.41, 37.77],
@@ -75,7 +75,10 @@ export class Map extends React.Component<IMapProps, IMapState> {
 
   async createMap() {
     try {
-      const { MapView, Map } = await moduleLoader(this.state.modules, this.state.moduleOptions);
+      const { Map, MapView } = await moduleLoader(
+        this.state.modules,
+        this.state.moduleOptions,
+      );
       const map = new Map(this.state.mapOptions);
       const view = new MapView({
         map,
@@ -89,7 +92,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.createMap();
   }
 
