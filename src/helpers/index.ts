@@ -1,3 +1,5 @@
+import { loadModules } from 'esri-loader';
+
 export enum BaseMapOptions {
   streets = 'streets',
   satellite = 'satellite',
@@ -17,3 +19,13 @@ export enum BaseMapOptions {
   streets_relief_vector = 'streets-relief-vector',
   streets_navigation_vector = 'streets-navigation-vector'
 }
+
+export const moduleLoader = (modules: Array<string>, moduleOptions: object) => {
+  return loadModules(modules, moduleOptions)
+    .then(([MapView, Map]) => {
+      return { MapView, Map };
+    })
+    .catch(err => {
+      throw new Error(err);
+    });
+};

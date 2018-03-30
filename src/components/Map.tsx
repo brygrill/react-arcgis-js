@@ -1,9 +1,8 @@
-import { loadModules } from 'esri-loader';
 import * as React from 'react';
 
 import { Container } from './Container';
 
-import { BaseMapOptions } from '../helpers';
+import { BaseMapOptions, moduleLoader } from '../helpers';
 
 export interface IMapProps {
   onLoading?: any; // string or component to render while loading map
@@ -74,19 +73,9 @@ export class Map extends React.Component<IMapProps, IMapState> {
     };
   }
 
-  loadModules = () => {
-    return loadModules(this.state.modules, this.state.moduleOptions)
-      .then(([MapView, Map]) => {
-        return { MapView, Map };
-      })
-      .catch(err => {
-        throw new Error(err);
-      });
-  };
-
   async createMap() {
     try {
-      const { MapView, Map } = await this.loadModules();
+      const { MapView, Map } = await moduleLoader(this.state.modules, this.state.moduleOptions);
       const map = new Map(this.state.mapOptions);
       const view = new MapView({
         map,
