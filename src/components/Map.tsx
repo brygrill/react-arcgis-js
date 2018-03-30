@@ -41,6 +41,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
 
   constructor(props: IMapProps) {
     super(props);
+    this.createMap = this.createMap.bind(this);
     this.state = {
       loading: true,
       error: false,
@@ -73,23 +74,31 @@ export class Map extends React.Component<IMapProps, IMapState> {
     };
   }
 
-  createMap = () => {
-    loadModules(this.state.modules, this.state.moduleOptions)
+  loadModules = () => {
+    return loadModules(this.state.modules, this.state.moduleOptions)
       .then(([MapView, Map]) => {
-        const map = new Map(this.state.mapOptions);
-        const view = new MapView({
-          map,
-          container: this.state.containerId,
-          center: this.props.center,
-          zoom: this.props.zoom,
-        });
-        console.log(map);
-        this.setState({ loading: false, map, view });
+        return { MapView, Map };
       })
-      .catch(() => {
-        this.setState({ loading: false, error: true });
+      .catch(err => {
+        throw new Error(err);
       });
   };
+
+  async createMap() {
+    try {
+      const { MapView, Map } = await this.loadModules();
+      const map = new Map(this.state.mapOptions);
+      const view = new MapView({
+        map,
+        container: this.state.containerId,
+        center: this.props.center,
+        zoom: this.props.zoom,
+      });
+      this.setState({ loading: false, map, view });
+    } catch (error) {
+      this.setState({ loading: false, error: true });
+    }
+  }
 
   componentDidMount() {
     this.createMap();
