@@ -2,3 +2,4 @@ webpack.config.js
 tsconfig.json
 tslint.json
 __tests__
+__storybook__
