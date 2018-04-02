@@ -57,6 +57,7 @@
   "scripts": {
     "start": "webpack --watch --progress --profile --colors --mode development",
     "test": "jest",
+    "watch": "jest --watch",
     "build": "webpack --progress --profile --colors --mode production"
   }
 }
