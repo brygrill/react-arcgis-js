@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { Map } from 'react-arcgis-js';
+import { Map } from '../../dist';
 
 const Child = props => {
   console.log(props);
