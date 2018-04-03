@@ -15,6 +15,7 @@ export interface IFeatureProps {
 }
 
 export interface IFeatureState {
+  loading: boolean;
   error: boolean;
   featureProperties: object;
   feature: object;
@@ -23,15 +24,15 @@ export interface IFeatureState {
 // format the FL options based on the prop passed in
 const setfeatureProperties = (props: IFeatureProps) => {
   switch (true) {
-    case (!!props.geojson):
+    case !!props.geojson:
       return {};
-    case (!!props.itemId):
+    case !!props.itemId:
       return {
         portalItem: {
           id: props.itemId,
-        }
+        },
       };
-    case (!!props.url):
+    case !!props.url:
       return {
         url: props.url,
       };
@@ -45,6 +46,7 @@ export class Feature extends React.Component<IFeatureProps, IFeatureState> {
     super(props);
     this.createFeature = this.createFeature.bind(this);
     this.state = {
+      loading: true,
       error: false,
       featureProperties: setfeatureProperties(props),
       feature: {},
@@ -55,10 +57,12 @@ export class Feature extends React.Component<IFeatureProps, IFeatureState> {
     try {
       const FeatureLayer = await loadFeatureLayerModule();
       const feature = new FeatureLayer(this.state.featureProperties);
-      this.props.map.add(feature);
-      this.setState({ feature });
+      feature.load().then((feature: object) => {
+        this.props.map.add(feature);
+        this.setState({ loading: false, feature });
+      });
     } catch (error) {
-      this.setState({ error: true });
+      this.setState({ loading: false, error: true });
     }
   }
 
@@ -67,6 +71,14 @@ export class Feature extends React.Component<IFeatureProps, IFeatureState> {
   }
 
   render() {
-    return <div />;
+    const childrenWithProps = React.Children.map(this.props.children, child => {
+      const childEl = child as React.ReactElement<any>;
+      return React.cloneElement(childEl, {
+        loading: this.state.loading,
+        error: this.state.error,
+        feature: this.state.feature,
+      });
+    });
+    return <div>{childrenWithProps}</div>;
   }
 }
