@@ -3,15 +3,6 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Map, Feature } from '../../dist';
 
-const FLChild = props => {
-  if (!props.loading) {
-    props.feature.on("click", function(event){
-      // event is the event handle returned after the event fires.
-      console.log(event.mapPoint);
-    });
-  };
-  return <div />;
-};
 storiesOf('Map', module)
   .add('With no props', () => <Map />)
   .add('With itemId prop', () => (
@@ -27,12 +18,5 @@ storiesOf('Map with Feature Layer', module)
   .add('With itemId prop', () => (
     <Map webGL>
       <Feature itemId="8444e275037549c1acab02d2626daaee" />
-    </Map>
-  ))
-  .add('With child element', () => (
-    <Map webGL>
-      <Feature itemId="8444e275037549c1acab02d2626daaee">
-        <FLChild />
-      </Feature>
     </Map>
   ));

@@ -4,6 +4,22 @@ import { Container } from './Container';
 
 import { loadMapModules } from '../helpers';
 
+interface IEventInterface {
+  mapPoint: object;
+  x: Number;
+  y: Number;
+  button: Number;
+  type: String;
+  stopPropagation: Function;
+  timestamp: Number;
+  native: object;
+}
+
+export interface IViewProperties {
+  on: Function;
+  hitTest: Function;
+}
+
 export interface IMapProps {
   onLoading?: any; // string or component to render while loading map
   onError?: any; //  string or component to render on error
@@ -23,7 +39,7 @@ export interface IMapState {
   modules: Array<string>;
   mapOptions: object;
   map: object;
-  view: object;
+  view: IViewProperties;
   moduleOptions: object;
 }
 
@@ -76,7 +92,10 @@ export class Map extends React.Component<IMapProps, IMapState> {
             basemap: this.props.baseMap,
           },
       map: {},
-      view: {},
+      view: {
+        on() {},
+        hitTest() {},
+      },
     };
   }
 
@@ -95,12 +114,28 @@ export class Map extends React.Component<IMapProps, IMapState> {
       });
       this.setState({ loading: false, map, view });
     } catch (error) {
+      console.log(error);
       this.setState({ loading: false, error: true });
     }
   }
 
+  initViewClickListener = () => {
+    const { view } = this.state;
+    view.on('click', (event: IEventInterface) => {
+      const screenPoint = {
+        x: event.x,
+        y: event.y,
+      };
+
+      view.hitTest(screenPoint).then((response: object) => {
+        console.log(response);
+      });
+    });
+  };
+
   async componentDidMount() {
-    this.createMap();
+    await this.createMap();
+    this.initViewClickListener();
   }
 
   render() {
@@ -137,7 +172,10 @@ export class Map extends React.Component<IMapProps, IMapState> {
     // when map is ready, pass props to children
     const childrenWithProps = React.Children.map(this.props.children, child => {
       const childEl = child as React.ReactElement<any>;
-      return React.cloneElement(childEl, { ...this.state });
+      return React.cloneElement(childEl, {
+        map: this.state.map,
+        view: this.state.view,
+      });
     });
 
     // render the map and children

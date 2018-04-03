@@ -30,11 +30,13 @@ const setfeatureProperties = (props: IFeatureProps) => {
       return {
         portalItem: {
           id: props.itemId,
+          outFields: ['*'],
         },
       };
     case !!props.url:
       return {
         url: props.url,
+        outFields: ['*'],
       };
     default:
       return {};
@@ -71,14 +73,6 @@ export class Feature extends React.Component<IFeatureProps, IFeatureState> {
   }
 
   render() {
-    const childrenWithProps = React.Children.map(this.props.children, child => {
-      const childEl = child as React.ReactElement<any>;
-      return React.cloneElement(childEl, {
-        loading: this.state.loading,
-        error: this.state.error,
-        feature: this.state.feature,
-      });
-    });
-    return <div>{childrenWithProps}</div>;
+    return null;
   }
 }
