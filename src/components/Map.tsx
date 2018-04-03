@@ -55,10 +55,17 @@ export class Map extends React.Component<IMapProps, IMapState> {
             dojoConfig: {
               has: {
                 'esri-featurelayer-webgl': 1,
+                'esri-promise-compatibility-deprecation-warnings': 0,
               },
             },
           }
-        : {},
+        : {
+            dojoConfig: {
+              has: {
+                'esri-promise-compatibility-deprecation-warnings': 0,
+              },
+            },
+          },
       mapOptions: props.itemId
         ? {
             portalItem: {
