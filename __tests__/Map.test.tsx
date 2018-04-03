@@ -6,7 +6,7 @@ import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
 
 import { Map } from '../src/components/Map';
-import { BaseMapOptions, moduleLoader } from '../src/helpers';
+import { loadMapModules } from '../src/helpers';
 
 configure({ adapter: new Adapter() });
 
@@ -17,7 +17,7 @@ jest.mock('../src/helpers', () => ({
     this.options = options;
     return this;
   },
-  moduleLoader() {
+  loadMapModules() {
     return Promise.resolve({
       MapView: this.mockConstructor,
       Map: this.mockConstructor,
@@ -90,7 +90,7 @@ describe('<Map />', () => {
       </Map>,
       { lifecycleExperimental: true },
     );
-    await moduleLoader(['one', 'two'], {});
+    await loadMapModules(['one', 'two'], {});
     expect(wrapper.state(`loading`)).toBeFalsy();
     expect(wrapper.state(`error`)).toBeFalsy();
   });

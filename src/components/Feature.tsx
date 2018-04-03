@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { loadFeatureLayerModule } from '../helpers';
+
 export interface IFeatureProps {
   map: object;
   view: object;

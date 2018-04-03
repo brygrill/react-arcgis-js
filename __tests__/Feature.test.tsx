@@ -6,6 +6,7 @@ import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
 
 import { Feature } from '../src/components/Feature';
+import { loadFeatureLayerModule } from '../src/helpers';
 
 configure({ adapter: new Adapter() });
 

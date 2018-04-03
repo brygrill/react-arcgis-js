@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { Container } from './Container';
 
-import { BaseMapOptions, moduleLoader } from '../helpers';
+import { loadMapModules } from '../helpers';
 
 export interface IMapProps {
   onLoading?: any; // string or component to render while loading map
@@ -75,7 +75,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
 
   async createMap() {
     try {
-      const { Map, MapView } = await moduleLoader(
+      const { Map, MapView } = await loadMapModules(
         this.state.modules,
         this.state.moduleOptions,
       );
