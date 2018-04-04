@@ -26,11 +26,15 @@ jest.mock('../src/helpers', () => ({
 const mockMap = {
   add() {}
 }
+const mockOnError = (err) => {
+  expect(err).toHaveProperty('error')
+  return err;
+}
 
 describe('<Map /> with Error' , () => {
   it('should set state properly when createMap catches', async () => {
     const wrapper = shallow(
-      <Map height="500px" width="100%">
+      <Map height="500px" width="100%" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
       { lifecycleExperimental: true },

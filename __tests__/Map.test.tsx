@@ -26,13 +26,17 @@ jest.mock('../src/helpers', () => ({
   },
 }));
 
+const mockOnError = (err) => {
+  return err;
+}
+
 let spy;
 
 describe('<Map />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <Map height="500px" width="100%" onErrorContent="Error!">
+      <Map height="500px" width="100%" onErrorContent="Error!" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
       div,
@@ -41,7 +45,7 @@ describe('<Map />', () => {
 
   it('should initially display loading msg', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onLoadingContent="Map Loading">
+      <Map height="500px" width="100%" onLoadingContent="Map Loading" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
     );
@@ -50,7 +54,7 @@ describe('<Map />', () => {
 
   it('should display error message when there is error', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onErrorContent="Error!!!">
+      <Map height="500px" width="100%" onErrorContent="Error!!!" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
     );
@@ -64,7 +68,7 @@ describe('<Map />', () => {
   it('should call componentDidMount', () => {
     spy = jest.spyOn(Map.prototype, 'componentDidMount');
     const wrapper = mount(
-      <Map height="500px" width="100%">
+      <Map height="500px" width="100%" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
     );
@@ -74,7 +78,7 @@ describe('<Map />', () => {
   it('should call createMap', () => {
     spy = jest.spyOn(Map.prototype, 'createMap');
     const wrapper = mount(
-      <Map height="500px" width="100%">
+      <Map height="500px" width="100%" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
     );
@@ -83,7 +87,7 @@ describe('<Map />', () => {
 
   it('should set state properly when createMap returns successfully', async () => {
     const wrapper = shallow(
-      <Map height="500px" width="100%">
+      <Map height="500px" width="100%" onError={mockOnError}>
         <div>Child Component</div>
       </Map>,
       { lifecycleExperimental: true },

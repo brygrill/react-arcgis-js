@@ -9,11 +9,15 @@ import { Boundary } from '../src/components/Boundary';
 
 configure({ adapter: new Adapter() });
 
+const mockOnError = (err) => {
+  return err;
+}
+
 describe('<Boundary />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <Boundary onErrorContent="Error!">
+      <Boundary onErrorContent="Error!" onError={mockOnError}>
         <div>Map</div>
       </Boundary>,
       div,
@@ -23,7 +27,7 @@ describe('<Boundary />', () => {
   it('should display children without error', () => {
     const tree = renderer
       .create(
-        <Boundary onErrorContent="Error!">
+        <Boundary onErrorContent="Error!" onError={mockOnError}>
           <div>Map</div>
         </Boundary>,
       )
@@ -33,7 +37,7 @@ describe('<Boundary />', () => {
 
   it('should display error message when there is error', () => {
     const component = shallow(
-      <Boundary onErrorContent="Error!">
+      <Boundary onErrorContent="Error!" onError={mockOnError}>
         <div>App</div>
       </Boundary>,
     );

@@ -9,6 +9,10 @@ import { Container } from '../src/components/Container';
 
 configure({ adapter: new Adapter() });
 
+const mockOnError = (err) => {
+  return err;
+}
+
 describe('<Container />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
@@ -18,6 +22,7 @@ describe('<Container />', () => {
         width="100%"
         id="container-test"
         onErrorContent="Error!"
+        onError={mockOnError}
       >
         <div>Map</div>
       </Container>,
@@ -33,6 +38,7 @@ describe('<Container />', () => {
           width="100%"
           id="container-test"
           onErrorContent="Error!"
+          onError={mockOnError}
         >
           <div>Map</div>
         </Container>,
