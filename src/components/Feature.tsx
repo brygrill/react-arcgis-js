@@ -9,9 +9,9 @@ export interface IMapPropInterface {
 export interface IFeatureProps {
   map: IMapPropInterface;
   view: object;
-  url: string;
-  itemId: string;
-  geojson: object;
+  url?: string;
+  itemId?: string;
+  geojson?: object;
 }
 
 export interface IFeatureState {
@@ -59,10 +59,8 @@ export class Feature extends React.Component<IFeatureProps, IFeatureState> {
     try {
       const FeatureLayer = await loadFeatureLayerModule();
       const feature = new FeatureLayer(this.state.featureProperties);
-      feature.load().then((feature: object) => {
-        this.props.map.add(feature);
-        this.setState({ loading: false, feature });
-      });
+      this.props.map.add(feature);
+      this.setState({ loading: false, feature });
     } catch (error) {
       this.setState({ loading: false, error: true });
     }

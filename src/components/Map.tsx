@@ -101,10 +101,12 @@ export class Map extends React.Component<IMapProps, IMapState> {
 
   async createMap() {
     try {
+      // load modules
       const { Map, MapView } = await loadMapModules(
         this.state.modules,
         this.state.moduleOptions,
       );
+      // init map
       const map = new Map(this.state.mapOptions);
       const view = new MapView({
         map,
@@ -112,15 +114,16 @@ export class Map extends React.Component<IMapProps, IMapState> {
         center: this.props.center,
         zoom: this.props.zoom,
       });
+      // init listener
+      this.initViewClickListener(view);
+      // set state
       this.setState({ loading: false, map, view });
     } catch (error) {
-      console.log(error);
       this.setState({ loading: false, error: true });
     }
   }
 
-  initViewClickListener = () => {
-    const { view } = this.state;
+  initViewClickListener = (view: IViewProperties) => {
     view.on('click', (event: IEventInterface) => {
       const screenPoint = {
         x: event.x,
@@ -133,9 +136,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
     });
   };
 
-  async componentDidMount() {
-    await this.createMap();
-    this.initViewClickListener();
+  componentDidMount() {
+    this.createMap();
   }
 
   render() {
