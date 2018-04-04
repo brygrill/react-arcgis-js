@@ -1,6 +1,7 @@
-import { configure, mount, shallow } from 'enzyme';
+// Test breaking module loading functions for Map and Feature
+
+import { configure, shallow } from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
-import toJson from 'enzyme-to-json';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
@@ -13,6 +14,7 @@ import { loadFeatureLayerModule, loadMapModules } from '../src/helpers';
 configure({ adapter: new Adapter() });
 
 jest.mock('../src/helpers', () => ({
+  // empty resolve will break things
   loadMapModules() {
     return Promise.resolve();
   },
