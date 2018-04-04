@@ -15,7 +15,7 @@ jest.mock('../src/helpers', () => ({
   mockConstructor(options) {
     this.options = options;
     this.url = '';
-    this.on = function on(){};
+    this.on = function on() {};
     return this;
   },
   loadMapModules() {
@@ -26,17 +26,19 @@ jest.mock('../src/helpers', () => ({
   },
 }));
 
-const mockOnError = (err) => {
-  return err;
-}
-
 let spy;
 
 describe('<Map />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <Map height="500px" width="100%" onErrorContent="Error!" onError={mockOnError}>
+      <Map
+        height="500px"
+        width="100%"
+        onErrorContent="Error!"
+        onError={jest.fn}
+        onMapClick={jest.fn}
+      >
         <div>Child Component</div>
       </Map>,
       div,
@@ -45,7 +47,13 @@ describe('<Map />', () => {
 
   it('should initially display loading msg', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onLoadingContent="Map Loading" onError={mockOnError}>
+      <Map
+        height="500px"
+        width="100%"
+        onLoadingContent="Map Loading"
+        onError={jest.fn}
+        onMapClick={jest.fn}
+      >
         <div>Child Component</div>
       </Map>,
     );
@@ -54,7 +62,13 @@ describe('<Map />', () => {
 
   it('should display error message when there is error', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onErrorContent="Error!!!" onError={mockOnError}>
+      <Map
+        height="500px"
+        width="100%"
+        onErrorContent="Error!!!"
+        onError={jest.fn}
+        onMapClick={jest.fn}
+      >
         <div>Child Component</div>
       </Map>,
     );
@@ -68,7 +82,7 @@ describe('<Map />', () => {
   it('should call componentDidMount', () => {
     spy = jest.spyOn(Map.prototype, 'componentDidMount');
     const wrapper = mount(
-      <Map height="500px" width="100%" onError={mockOnError}>
+      <Map height="500px" width="100%" onError={jest.fn} onMapClick={jest.fn}>
         <div>Child Component</div>
       </Map>,
     );
@@ -78,7 +92,7 @@ describe('<Map />', () => {
   it('should call createMap', () => {
     spy = jest.spyOn(Map.prototype, 'createMap');
     const wrapper = mount(
-      <Map height="500px" width="100%" onError={mockOnError}>
+      <Map height="500px" width="100%" onError={jest.fn} onMapClick={jest.fn}>
         <div>Child Component</div>
       </Map>,
     );
@@ -87,7 +101,7 @@ describe('<Map />', () => {
 
   it('should set state properly when createMap returns successfully', async () => {
     const wrapper = shallow(
-      <Map height="500px" width="100%" onError={mockOnError}>
+      <Map height="500px" width="100%" onError={jest.fn} onMapClick={jest.fn}>
         <div>Child Component</div>
       </Map>,
       { lifecycleExperimental: true },

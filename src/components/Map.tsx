@@ -14,6 +14,7 @@ export interface IMapProps extends IBoundaryProps {
   center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
   zoom?: number; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom
   webGL?: boolean; // will load dojo config to enable WebGL Feature Layers
+  onMapClick: Function; // will return object on map click
 }
 
 export interface IMapState {
@@ -32,6 +33,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
     onLoadingContent: 'Loading...',
     onErrorContent: 'Error loading map...',
     onError: () => {},
+    onMapClick: () => {},
     baseMap: 'streets-navigation-vector',
     height: '500px',
     width: '100%',
@@ -117,7 +119,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
       };
 
       view.hitTest(screenPoint).then((response: object) => {
-        console.log(response);
+        this.props.onMapClick(response);
       });
     });
   };
@@ -163,6 +165,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
     const childrenWithProps = React.Children.map(this.props.children, child => {
       const childEl = child as React.ReactElement<any>;
       return React.cloneElement(childEl, {
+        loading: this.state.loading,
+        error: this.state.error,
         map: this.state.map,
         view: this.state.view,
       });

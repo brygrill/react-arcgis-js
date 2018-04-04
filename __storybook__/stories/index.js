@@ -3,11 +3,16 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { Map, Feature } from '../../dist';
 
+const resp = resp => {
+  console.log(resp);
+};
+
 storiesOf('Map', module)
   .add('With no props', () => <Map />)
   .add('With itemId prop', () => (
     <Map itemId="aea0b8bf28884a27bfb5523b3d6d6aeb" />
-  ));
+  ))
+  .add('With onMapClick prop', () => <Map onMapClick={resp}/>);
 
 storiesOf('Map with Feature Layer', module)
   .add('With url prop', () => (
