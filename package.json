@@ -1,12 +1,11 @@
 {
   "name": "react-arcgis-js",
   "version": "0.1.0",
+  "description": "React components for the ArcGIS JS API",
   "main": "dist/index.js",
-  "types": "dist/esm/index.d.ts",
   "repository": "https://github.com/brygrill/react-arcgis-js.git",
   "author": "Bryan Grill",
   "license": "MIT",
-  "private": false,
   "jest": {
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
