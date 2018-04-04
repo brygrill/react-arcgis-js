@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 export interface IBoundaryProps {
-  onErrorContent: any;
+  onErrorContent: any; // string or component to render on error
+  onError: Function; // function that will get called on error and return the error as { error: ..., info: ...}
 }
 
 export interface IBoundaryState {
@@ -21,6 +22,7 @@ export class Boundary extends React.Component<IBoundaryProps, IBoundaryState> {
   }
 
   componentDidCatch(error: Error, info: React.ErrorInfo) {
+    this.props.onError({ error, info });
     this.setState({ error: true });
   }
 

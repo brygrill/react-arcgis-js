@@ -1,28 +1,12 @@
 import * as React from 'react';
 
+import { IBoundaryProps } from './Boundary';
 import { Container } from './Container';
 
-import { loadMapModules } from '../helpers';
+import { IEventInterface, IViewProperties, loadMapModules } from '../helpers';
 
-interface IEventInterface {
-  mapPoint: object;
-  x: Number;
-  y: Number;
-  button: Number;
-  type: String;
-  stopPropagation: Function;
-  timestamp: Number;
-  native: object;
-}
-
-export interface IViewProperties {
-  on: Function;
-  hitTest: Function;
-}
-
-export interface IMapProps {
+export interface IMapProps extends IBoundaryProps {
   onLoadingContent?: any; // string or component to render while loading map
-  onErrorContent?: any; //  string or component to render on error
   itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
   baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   height: string; // height of map container in px or %
@@ -47,6 +31,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
     onLoadingContent: 'Loading...',
     onErrorContent: 'Error loading map...',
+    onError: () => {},
     baseMap: 'streets-navigation-vector',
     height: '500px',
     width: '100%',
@@ -119,6 +104,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
       // set state
       this.setState({ loading: false, map, view });
     } catch (error) {
+      this.props.onError(error);
       this.setState({ loading: false, error: true });
     }
   }
@@ -148,6 +134,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
           height={this.props.height}
           width={this.props.width}
           onErrorContent={this.props.onErrorContent}
+          onError={this.props.onError}
           id={this.state.containerId}
           hidden={this.state.loading}
         >
@@ -163,6 +150,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
           height={this.props.height}
           width={this.props.width}
           onErrorContent={this.props.onErrorContent}
+          onError={this.props.onError}
           id={this.state.containerId}
           hidden={this.state.error}
         >
@@ -186,6 +174,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
         height={this.props.height}
         width={this.props.width}
         onErrorContent={this.props.onErrorContent}
+        onError={this.props.onError}
         id={this.state.containerId}
       >
         {childrenWithProps}
