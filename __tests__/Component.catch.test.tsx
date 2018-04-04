@@ -5,17 +5,25 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as renderer from 'react-test-renderer';
 
+import { Feature } from '../src/components/Feature';
 import { Map } from '../src/components/Map';
-import { loadMapModules } from '../src/helpers';
+
+import { loadFeatureLayerModule, loadMapModules } from '../src/helpers';
 
 configure({ adapter: new Adapter() });
 
-// TODO: figure out how to simulate catch in Map.test.tsx
 jest.mock('../src/helpers', () => ({
   loadMapModules() {
     return Promise.resolve();
   },
+  loadFeatureLayerModule() {
+    return Promise.resolve();
+  }
 }));
+
+const mockMap = {
+  add() {}
+}
 
 describe('<Map /> with Error' , () => {
   it('should set state properly when createMap catches', async () => {
@@ -26,6 +34,18 @@ describe('<Map /> with Error' , () => {
       { lifecycleExperimental: true },
     );
     await loadMapModules([], {});
+    expect(wrapper.state(`loading`)).toBeFalsy();
+    expect(wrapper.state(`error`)).toBeTruthy();
+  });
+});
+
+describe('<Feature /> with Error' , () => {
+  it('should set state properly when createFeature catches', async () => {
+    const wrapper = shallow(
+      <Feature map={mockMap} view={{}} url=""/>,
+      { lifecycleExperimental: true },
+    );
+    await loadFeatureLayerModule();
     expect(wrapper.state(`loading`)).toBeFalsy();
     expect(wrapper.state(`error`)).toBeTruthy();
   });

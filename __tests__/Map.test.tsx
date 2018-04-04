@@ -12,9 +12,10 @@ configure({ adapter: new Adapter() });
 
 // mock success
 jest.mock('../src/helpers', () => ({
-  // TODO: mock rendering dom element
   mockConstructor(options) {
     this.options = options;
+    this.url = '';
+    this.on = function on(){};
     return this;
   },
   loadMapModules() {
@@ -24,13 +25,10 @@ jest.mock('../src/helpers', () => ({
     });
   },
 }));
-// mock catch
 
 let spy;
 
 describe('<Map />', () => {
-
-
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
@@ -93,6 +91,7 @@ describe('<Map />', () => {
     await loadMapModules(['one', 'two'], {});
     expect(wrapper.state(`loading`)).toBeFalsy();
     expect(wrapper.state(`error`)).toBeFalsy();
+    expect(wrapper.state(`view`)).toHaveProperty('url');
   });
 });
 
