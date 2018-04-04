@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface IBoundaryProps {
-  onErrorContent: any; // string or component to render on error
+  onErrorContent?: any; // string or component to render on error
   onError: Function; // function that will get called on error and return the error as { error: ..., info: ...}
 }
 
