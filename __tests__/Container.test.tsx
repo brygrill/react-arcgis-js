@@ -17,7 +17,7 @@ describe('<Container />', () => {
         height="500px"
         width="100%"
         id="container-test"
-        onError="Error!"
+        onErrorContent="Error!"
       >
         <div>Map</div>
       </Container>,
@@ -32,7 +32,7 @@ describe('<Container />', () => {
           height="500px"
           width="100%"
           id="container-test"
-          onError="Error!"
+          onErrorContent="Error!"
         >
           <div>Map</div>
         </Container>,

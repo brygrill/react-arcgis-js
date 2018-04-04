@@ -32,7 +32,7 @@ describe('<Map />', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
-      <Map height="500px" width="100%" onError="Error!">
+      <Map height="500px" width="100%" onErrorContent="Error!">
         <div>Child Component</div>
       </Map>,
       div,
@@ -41,7 +41,7 @@ describe('<Map />', () => {
 
   it('should initially display loading msg', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onLoading="Map Loading">
+      <Map height="500px" width="100%" onLoadingContent="Map Loading">
         <div>Child Component</div>
       </Map>,
     );
@@ -50,7 +50,7 @@ describe('<Map />', () => {
 
   it('should display error message when there is error', () => {
     const component = shallow(
-      <Map height="500px" width="100%" onError="Error!!!">
+      <Map height="500px" width="100%" onErrorContent="Error!!!">
         <div>Child Component</div>
       </Map>,
     );

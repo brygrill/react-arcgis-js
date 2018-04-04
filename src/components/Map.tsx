@@ -21,8 +21,8 @@ export interface IViewProperties {
 }
 
 export interface IMapProps {
-  onLoading?: any; // string or component to render while loading map
-  onError?: any; //  string or component to render on error
+  onLoadingContent?: any; // string or component to render while loading map
+  onErrorContent?: any; //  string or component to render on error
   itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
   baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
   height: string; // height of map container in px or %
@@ -45,8 +45,8 @@ export interface IMapState {
 
 export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
-    onLoading: 'Loading...',
-    onError: 'Error loading map...',
+    onLoadingContent: 'Loading...',
+    onErrorContent: 'Error loading map...',
     baseMap: 'streets-navigation-vector',
     height: '500px',
     width: '100%',
@@ -147,11 +147,11 @@ export class Map extends React.Component<IMapProps, IMapState> {
         <Container
           height={this.props.height}
           width={this.props.width}
-          onError={this.props.onError}
+          onErrorContent={this.props.onErrorContent}
           id={this.state.containerId}
           hidden={this.state.loading}
         >
-          {this.props.onLoading}
+          {this.props.onLoadingContent}
         </Container>
       );
     }
@@ -162,11 +162,11 @@ export class Map extends React.Component<IMapProps, IMapState> {
         <Container
           height={this.props.height}
           width={this.props.width}
-          onError={this.props.onError}
+          onErrorContent={this.props.onErrorContent}
           id={this.state.containerId}
           hidden={this.state.error}
         >
-          {this.props.onError}
+          {this.props.onErrorContent}
         </Container>
       );
     }
@@ -185,7 +185,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
       <Container
         height={this.props.height}
         width={this.props.width}
-        onError={this.props.onError}
+        onErrorContent={this.props.onErrorContent}
         id={this.state.containerId}
       >
         {childrenWithProps}

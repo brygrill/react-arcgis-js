@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 export interface IBoundaryProps {
-  onError: any;
+  onErrorContent: any;
 }
 
 export interface IBoundaryState {
@@ -10,7 +10,7 @@ export interface IBoundaryState {
 
 export class Boundary extends React.Component<IBoundaryProps, IBoundaryState> {
   public static defaultProps: Partial<IBoundaryProps> = {
-    onError: 'Error loading map...',
+    onErrorContent: 'Error loading map...',
   };
 
   constructor(props: IBoundaryProps) {
@@ -26,7 +26,7 @@ export class Boundary extends React.Component<IBoundaryProps, IBoundaryState> {
 
   render() {
     if (this.state.error) {
-      return <div>{this.props.onError}</div>;
+      return <div>{this.props.onErrorContent}</div>;
     }
     return <div>{this.props.children}</div>;
   }

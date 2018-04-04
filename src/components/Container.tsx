@@ -7,14 +7,14 @@ export interface IContainerProps {
   width: string;
   hidden?: boolean;
   id: string;
-  onError: any;
+  onErrorContent: any;
   children?: any;
 }
 
 export const Container = (props: IContainerProps) => {
   const { height, width, hidden, children} = props;
   return (
-    <Boundary onError={props.onError}>
+    <Boundary onErrorContent={props.onErrorContent}>
       <div style={{ height, width }}>
         <div
           id={props.id}
