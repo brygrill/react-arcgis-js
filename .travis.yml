@@ -1,17 +1,20 @@
 language: node_js
 node_js:
-  - "8"
+- '8'
 sudo: false
-
-branches:
-  only:
-  - master
-
 cache:
   yarn: true
   directories:
-    - "node_modules"
-
+  - node_modules
 script:
-  - yarn test:ci
-  - yarn build
+- yarn test:ci
+- yarn build
+deploy:
+  provider: npm
+  email: grill12345678@aol.com
+  api_key:
+    secure: lXDzVssmsdh57irl3epOXFb//BA4a65OlOfO975Crq2+TofZPXTmeo3VHx0UPjdroRzFJyPGbR5Ftn6D148ipbIo2vcJrzIAwkVO105Gjij8YHqw07c/bE1JW7Knl4Rp/5oMyhi+aXnVA4BaqMdzAkGD88mm+hYYro1TWfhWI68fQUSy8wJreda7h1RPr196M2PhmdhvjmBlK8CNxzeOIRSVfaNguSOSVD3Ea4Jm9OxqOe9xBbb1m9FwPewh0oufZYJtnViUgvtPsjoERoF/w3er3uCdHkZgW18otI1GQ94RMjbxNkgtwjSwq/BBLhcrXGc/gotZS4MchUk4X+8HzHG1kN5lb0ATbKfx7FPsm6+Vy6iztNm1daSbBLc7FRxGU9rTpiDccYh+lDJoG4ot2XwxigwA1GFIRu1Ghg0YEmMJKAIeDVTFNxnQZB8ynvLt6RtU352r26G2cfVTGSyy+RyXHLu/bPkoXF2dwOz0mEBjm+NPkUcieZVc4+bUOZGAfAHUsIKOqjFElYmE3D5TQQ0Ts+Qa7xAyjqyt3nRwYFPP9wcZxPcPjiRjsFga7PxFSH8gsgjPK8Pqg3x5vbjNA4Lu62wt9gObNEoWq7ylP6ILs1sqfy33kY8Tji4o8YsV20gA5Gq8tF5CeQx878hDPOGb92rRqcUxJjkR5ZTb+Ew=
+  on:
+    tags: true
+    branch: master
+    repo: brygrill/react-arcgis-js

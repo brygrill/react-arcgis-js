@@ -59,6 +59,9 @@
     "test": "jest",
     "test:w": "jest --watch --silent",
     "test:ci": "jest --ci",
-    "build": "webpack --progress --profile --colors --mode production"
+    "build": "webpack --progress --profile --colors --mode production",
+    "preversion": "yarn test && yarn build",
+    "deploy:minor": "npm version minor -m \"version %s\"",
+    "postversion": "git push && git push --tags"
   }
 }
