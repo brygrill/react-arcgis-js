@@ -56,9 +56,8 @@
   "scripts": {
     "start": "webpack --watch --progress --profile --colors --mode development",
     "story": "cd __storybook__ && yarn start",
-    "test": "jest --silent",
-    "watch": "jest --watch --silent",
-    "watch:verbose": "jest --watch --verbose",
+    "test": "jest",
+    "test:w": "jest --watch --silent",
     "test:ci": "jest --ci",
     "build": "webpack --progress --profile --colors --mode production"
   }
