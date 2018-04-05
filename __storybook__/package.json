@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-markdown": "^3.3.0"
   },
   "scripts": {
     "start": "start-storybook -p 9001 -c .storybook"

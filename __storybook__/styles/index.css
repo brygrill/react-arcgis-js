@@ -1,5 +1,9 @@
 @import url('https://js.arcgis.com/4.6/esri/css/main.css');
 
+html, body {
+  font-family: -apple-system,BlinkMacSystemFont,avenir next,avenir,helvetica neue,helvetica,ubuntu,roboto,noto,segoe ui,arial,sans-serif;
+}
+
 #root {
   height: 600px;
   width: 100%;
