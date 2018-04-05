@@ -9,12 +9,12 @@ export interface IMapProps extends IBoundaryProps {
   onLoadingContent?: any; // string or component to render while loading map
   itemId?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
   baseMap?: string; // https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap
-  height: string; // height of map container in px or %
-  width: string; // width of map container in px or %
+  height?: string; // height of map container in px or %
+  width?: string; // width of map container in px or %
   center?: Array<Number>; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center
   zoom?: number; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom
   webGL?: boolean; // will load dojo config to enable WebGL Feature Layers
-  onMapClick: Function; // will return object on map click
+  onMapClick?(event: any): void; // will return object on map click
 }
 
 export interface IMapState {
@@ -31,14 +31,13 @@ export interface IMapState {
 export class Map extends React.Component<IMapProps, IMapState> {
   public static defaultProps: Partial<IMapProps> = {
     onLoadingContent: 'Loading...',
-    onErrorContent: 'Error loading map...',
-    onError: () => {},
-    onMapClick: () => {},
     baseMap: 'streets-navigation-vector',
     height: '500px',
     width: '100%',
     center: [-122.41, 37.77],
     zoom: 10,
+    webGL: false,
+    onMapClick: () => {},
   };
 
   constructor(props: IMapProps) {
@@ -112,6 +111,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   }
 
   initViewClickListener = (view: IViewProperties) => {
+    const { onMapClick } = this.props;
     view.on('click', (event: IEventInterface) => {
       const screenPoint = {
         x: event.x,
@@ -119,7 +119,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
       };
 
       view.hitTest(screenPoint).then((response: object) => {
-        this.props.onMapClick(response);
+        onMapClick!(response);
       });
     });
   };
@@ -133,8 +133,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
     if (this.state.loading) {
       return (
         <Container
-          height={this.props.height}
-          width={this.props.width}
+          height={this.props.height as string}
+          width={this.props.width as string}
           onErrorContent={this.props.onErrorContent}
           onError={this.props.onError}
           id={this.state.containerId}
@@ -149,8 +149,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
     if (this.state.error) {
       return (
         <Container
-          height={this.props.height}
-          width={this.props.width}
+          height={this.props.height as string}
+          width={this.props.width as string}
           onErrorContent={this.props.onErrorContent}
           onError={this.props.onError}
           id={this.state.containerId}
@@ -175,8 +175,8 @@ export class Map extends React.Component<IMapProps, IMapState> {
     // render the map and children
     return (
       <Container
-        height={this.props.height}
-        width={this.props.width}
+        height={this.props.height as string}
+        width={this.props.width as string}
         onErrorContent={this.props.onErrorContent}
         onError={this.props.onError}
         id={this.state.containerId}
