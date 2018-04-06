@@ -1,13 +1,9 @@
 # react-arcgis-js
-React components for the ArcGIS JS API
+A set of React components for the 4.0 version of the ArcGIS API for JavaScript
 
 [![Build Status](https://travis-ci.org/brygrill/react-arcgis-js.svg?branch=master)](https://travis-ci.org/brygrill/react-arcgis-js)
 
-***
-
 ![alt text](https://user-images.githubusercontent.com/14791048/38412403-4c881140-3957-11e8-8208-436efeec1b43.png "react-arcgis-js map screenshot")
-
-A set of React components for the 4.0 version of the ArcGIS API for JavaScript. Under the hood,[esri-loader](https://github.com/Esri/esri-loader) takes care of loading the JS API modules, so it can be used in any React/Webpack app.
 
 ## Installation
 Add the package from npm:
@@ -55,6 +51,7 @@ Examples available at https://brygrill.github.io/react-arcgis-js
 Render a [Map](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) or [WebMap](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html). Pass an `itemId` prop to render WebMap via Portal Item ID or pass a `baseMap` prop to render a Map.
 
 __Props:__  
+
 | Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | ----- |
 | itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem) |
@@ -70,6 +67,7 @@ __Props:__
 | onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click |
 
 __Map Children:__  
+
 The following props are passed to child components of `<Map/>`:
 | Property | Type | Description |
 | --- | --- | ----- |
@@ -82,6 +80,7 @@ The following props are passed to child components of `<Map/>`:
 Render a [FeatureLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) as a child of `<Map/>` component. Pass a `url` prop to render via service URL or `itemId` to render via Portal Item ID.
 
 __Props:__  
+
 | Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | ---  |
 | url | string | false | None | render FeatureLayer via service URL |
