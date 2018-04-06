@@ -86,6 +86,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
   }
 
   async createMap() {
+    const { onError } = this.props;
     try {
       // load modules
       const { Map, MapView } = await loadMapModules(
@@ -105,7 +106,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
       // set state
       this.setState({ loading: false, map, view });
     } catch (error) {
-      this.props.onError({ error, info: null });
+      onError!({ error, info: null });
       this.setState({ loading: false, error: true });
     }
   }
