@@ -2,6 +2,7 @@
 A set of React components for the 4.0 version of the ArcGIS API for JavaScript
 
 [![Build Status](https://travis-ci.org/brygrill/react-arcgis-js.svg?branch=master)](https://travis-ci.org/brygrill/react-arcgis-js)
+[![Edit react-arcgis-js-examples](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3q0l4mlj9m)
 
 ![alt text](https://user-images.githubusercontent.com/14791048/38412403-4c881140-3957-11e8-8208-436efeec1b43.png "react-arcgis-js map screenshot")
 
@@ -44,7 +45,6 @@ ReactDOM.render(
   document.getElementById('root')
 );
 ```
-Examples available at https://brygrill.github.io/react-arcgis-js
 
 ## Components
 ### Map
