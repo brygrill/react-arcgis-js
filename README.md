@@ -1,11 +1,13 @@
 # react-arcgis-js
 React components for the ArcGIS JS API
 
-***
-
 [![Build Status](https://travis-ci.org/brygrill/react-arcgis-js.svg?branch=master)](https://travis-ci.org/brygrill/react-arcgis-js)
 
-A set of React components for the 4.0 version of the ArcGIS API for JavaScript. It uses [esri-loader](https://github.com/Esri/esri-loader) under the hood, so it's ready to use in React/Webpack apps without dealing with AMD modules.
+***
+
+![alt text](https://user-images.githubusercontent.com/14791048/38412403-4c881140-3957-11e8-8208-436efeec1b43.png "react-arcgis-js map screenshot")
+
+A set of React components for the 4.0 version of the ArcGIS API for JavaScript. Under the hood,[esri-loader](https://github.com/Esri/esri-loader) takes care of loading the JS API modules, so it can be used in any React/Webpack app.
 
 ## Installation
 Add the package from npm:
@@ -52,14 +54,9 @@ Examples available at https://brygrill.github.io/react-arcgis-js
 ### Map
 Render a [Map](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) or [WebMap](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html). Pass an `itemId` prop to render WebMap via Portal Item ID or pass a `baseMap` prop to render a Map.
 
-__Props:__
+__Props:__  
 | Property | Type | Required | Default | Description |
-| ---- | ---- | ---- | ---- | ------ |
-| height | string | false | 500px | height of map container in px or % |
-| width | string | false | 100% | width of map container in px or % |
-
-| Property | Type | Required | Default | Description |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | ----- |
 | itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem) |
 | baseMap | string | false | streets-navigation-vector | [Basemap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap) |
 | height | string | false | 500px | height of map container in px or % |
@@ -72,23 +69,23 @@ __Props:__
 | onError | function | false | None | Will return on error to handle as you wish |
 | onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click |
 
-__Map Children:__
+__Map Children:__  
 The following props are passed to child components of `<Map/>`:
-Property | Type | Description
---- | --- | ---
-map | object | Map or WebMap object
-view | object | MapView object
-loading | boolean | loading status
-error | boolean | error status
+| Property | Type | Description |
+| --- | --- | ----- |
+| map | object | Map or WebMap object |
+| view | object | MapView object |
+| loading | boolean | loading status |
+| error | boolean | error status |
 
 ### Feature
 Render a [FeatureLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) as a child of `<Map/>` component. Pass a `url` prop to render via service URL or `itemId` to render via Portal Item ID.
 
-__Props:__
-Property | Type | Required | Default | Description
---- | --- | --- | --- | ---
-url | string | false | None | render FeatureLayer via service URL
-itemId | string | false | None | render FeatureLayer via Portal Item ID
+__Props:__  
+| Property | Type | Required | Default | Description |
+| --- | --- | --- | --- | ---  |
+| url | string | false | None | render FeatureLayer via service URL |
+| itemId | string | false | None | render FeatureLayer via Portal Item ID |
 
 ## Acknowledgments
 Wouldn't be possible without these projects:
