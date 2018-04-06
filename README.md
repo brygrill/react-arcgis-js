@@ -53,19 +53,19 @@ Examples available at https://brygrill.github.io/react-arcgis-js
 Render a [Map](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) or [WebMap](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html). Pass an `itemId` prop to render WebMap via Portal Item ID or pass a `baseMap` prop to render a Map.
 
 __Props:__
-Property | Type | Required | Default | Description
---- | --- | --- | --- | ---
-itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem)
-baseMap | string | false | streets-navigation-vector | [Basemap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap)
-height | string | false | 500px | height of map container in px or %
-width | string | false | 100% | width of map container in px or %
-center | array | false | [-122.41, 37.77] | coordinates to [center the map on](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center)
-zoom | number | false | 10 | starting [zoom level](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom) of the map
-webGL | boolean | false | false | load dojo config to enable WebGL Feature Layers
-onLoadingContent | any | false | Loading... | string or component to render while loading map
-onErrorContent | any | false | Error loading map... | string or component to render on error
-onError | function | false | None | Will return on error to handle as you wish
-onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click
+| Property | Type | Required | Default | Description |
+| --- | --- | --- | --- | --- |
+| itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem) |
+| baseMap | string | false | streets-navigation-vector | [Basemap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap) |
+| height | string | false | 500px | height of map container in px or % |
+| width | string | false | 100% | width of map container in px or % |
+| center | array | false | [-122.41, 37.77] | coordinates to [center the map on](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#center) |
+| zoom | number | false | 10 | starting [zoom level](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom) of the map |
+| webGL | boolean | false | false | load dojo config to enable WebGL Feature Layers |
+| onLoadingContent | any | false | Loading... | string or component to render while loading map |
+| onErrorContent | any | false | Error loading map... | string or component to render on error |
+| onError | function | false | None | Will return on error to handle as you wish |
+| onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click |
 
 __Map Children:__
 The following props are passed to child components of `<Map/>`:
