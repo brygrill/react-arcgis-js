@@ -1,8 +1,7 @@
 # react-arcgis-js
-A set of React components for the 4.0 version of the ArcGIS API for JavaScript
+A set of React components for the 4.0 version of the ArcGIS API for JavaScript. Demo and examples available on [codesandbox](https://codesandbox.io/s/3q0l4mlj9m).
 
 [![Build Status](https://travis-ci.org/brygrill/react-arcgis-js.svg?branch=master)](https://travis-ci.org/brygrill/react-arcgis-js)
-[![Edit react-arcgis-js-examples](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3q0l4mlj9m)
 
 ![alt text](https://user-images.githubusercontent.com/14791048/38412403-4c881140-3957-11e8-8208-436efeec1b43.png "react-arcgis-js map screenshot")
 
@@ -46,12 +45,14 @@ ReactDOM.render(
 );
 ```
 
+## Demo
+[![Edit react-arcgis-js-examples](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/3q0l4mlj9m)
+
 ## Components
 ### Map
 Render a [Map](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html) or [WebMap](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html). Pass an `itemId` prop to render WebMap via Portal Item ID or pass a `baseMap` prop to render a Map.
 
-__Props:__  
-
+#### Props
 | Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | ----- |
 | itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem) |
@@ -66,7 +67,7 @@ __Props:__
 | onError | function | false | None | Will return on error to handle as you wish |
 | onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click |
 
-__Map Children:__  
+#### Map Children:
 The following props are passed to child components of `<Map/>`:  
 
 | Property | Type | Description |
@@ -79,8 +80,7 @@ The following props are passed to child components of `<Map/>`:
 ### Feature
 Render a [FeatureLayer](https://developers.arcgis.com/javascript/latest/api-reference/esri-layers-FeatureLayer.html) as a child of `<Map/>` component. Pass a `url` prop to render via service URL or `itemId` to render via Portal Item ID.
 
-__Props:__  
-
+#### Props:
 | Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | ---  |
 | url | string | false | None | render FeatureLayer via service URL |
