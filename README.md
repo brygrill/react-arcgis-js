@@ -54,6 +54,11 @@ Render a [Map](https://developers.arcgis.com/javascript/latest/api-reference/esr
 
 __Props:__
 | Property | Type | Required | Default | Description |
+| ---- | ---- | ---- | ---- | ------ |
+| height | string | false | 500px | height of map container in px or % |
+| width | string | false | 100% | width of map container in px or % |
+
+| Property | Type | Required | Default | Description |
 | --- | --- | --- | --- | --- |
 | itemId | string | false | None | [Id of webmap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem) |
 | baseMap | string | false | streets-navigation-vector | [Basemap to load](https://developers.arcgis.com/javascript/latest/api-reference/esri-Map.html#basemap) |
