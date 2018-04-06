@@ -67,8 +67,8 @@ __Props:__
 | onMapClick | function | false | None | Will return [mapPoint and graphics object](https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#HitTestResult) on map click |
 
 __Map Children:__  
+The following props are passed to child components of `<Map/>`:  
 
-The following props are passed to child components of `<Map/>`:
 | Property | Type | Description |
 | --- | --- | ----- |
 | map | object | Map or WebMap object |
