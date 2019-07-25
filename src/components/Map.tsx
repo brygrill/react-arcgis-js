@@ -15,6 +15,7 @@ export interface IMapProps extends IBoundaryProps {
   zoom?: number; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#zoom
   webGL?: boolean; // will load dojo config to enable WebGL Feature Layers
   onMapClick?(event: any): void; // will return object on map click
+  constraints?: object; // https://developers.arcgis.com/javascript/latest/api-reference/esri-views-MapView.html#constraints
 }
 
 export interface IMapState {
@@ -100,6 +101,7 @@ export class Map extends React.Component<IMapProps, IMapState> {
         container: this.state.containerId,
         center: this.props.center,
         zoom: this.props.zoom,
+        ...(this.props.constraints && {constraints: this.props.constraints})
       });
       // init listener
       this.initViewClickListener(view);
